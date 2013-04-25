@@ -1,0 +1,4 @@
+PenaltyMethodGJI
+================
+
+Penalty method
