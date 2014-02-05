@@ -49,15 +49,16 @@ S = kron(speye(n(2)),D1) + kron(D2,speye(n(1)));
 % Mass matrix including ABC's
 w = [0 ones(1,n(1)-2) 0];
 w = w(:)*[0 ones(1,n(2)-2) 0];
-w = w(:);
 
-v = [1 zeros(1,n(1)-2) 1]/h(1);
-v = v(:)*[1 zeros(1,n(1)-2) 1]/h(2);
+v = (1-w);
+v(:,[1 end]) = v(:,[1 end])/h(2);
+v([1 end],:) = v([1 end],:)/h(1);
 
-M = omega^2*spdiags(w.*m,0,N,N) + 1i*omega*spdiags(v.*sqrt(m),0,N,N);
+M = omega^2*spdiags(w(:).*m,0,N,N) + 1i*omega*spdiags(v(:).*sqrt(m),0,N,N);
 
 % 
 A = M + S;
+
 
 
 
